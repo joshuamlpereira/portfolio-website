@@ -19,6 +19,57 @@
     --main-color: #b8b8b8;
 }
 
+/* === After Dark: Starfield Background === */
+#stars1, #stars2, #stars3 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    background: transparent;
+    z-index: -1;
+    pointer-events: none;
+}
+
+#stars1 {
+    width: 1px;
+    height: 1px;
+    box-shadow: var(--stars1);
+    animation: animStars 50s linear infinite;
+}
+
+#stars2 {
+    width: 2px;
+    height: 2px;
+    box-shadow: var(--stars2);
+    animation: animStars 100s linear infinite;
+}
+
+#stars3 {
+    width: 3px;
+    height: 3px;
+    box-shadow: var(--stars3);
+    animation: animStars 150s linear infinite;
+}
+
+#stars1::after,
+#stars2::after,
+#stars3::after {
+    content: '';
+    position: absolute;
+    top: 2000px;
+    left: 0;
+    border-radius: 50%;
+    background: transparent;
+}
+#stars1::after { width: 1px; height: 1px; box-shadow: var(--stars1); }
+#stars2::after { width: 2px; height: 2px; box-shadow: var(--stars2); }
+#stars3::after { width: 3px; height: 3px; box-shadow: var(--stars3); }
+
+@keyframes animStars {
+    from { transform: translateY(0px); }
+    to   { transform: translateY(-2000px); }
+}
+
 html {
     font-size: 62.5%;
     overflow-x: hidden;
@@ -173,7 +224,7 @@ span {
 
 /* About Section */
 .about {
-    background: var(--second-bg-color);
+    background: transparent;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -192,7 +243,7 @@ span {
 
 /* Projects Section */
 .projects {
-    background: var(--bg-color);
+    background: transparent;
 }
 
 .projects-container {
@@ -247,7 +298,7 @@ span {
 
 /* Skills Section */
 .skills {
-    background: var(--second-bg-color);
+    background: transparent;
 }
 
 .skills-container {
@@ -275,7 +326,7 @@ span {
 
 /* Contact Section */
 .contact {
-    background: var(--bg-color);
+    background: transparent;
     text-align: center;
 }
 
