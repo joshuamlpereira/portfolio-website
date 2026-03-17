@@ -1,5 +1,5 @@
-/* General Styling & Variables */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+/* OG Macintosh + After Dark Theme */
+/* Chicago/Geneva font stack for authentic classic Mac feel */
 
 * {
     margin: 0;
@@ -9,14 +9,25 @@
     border: none;
     outline: none;
     scroll-behavior: smooth;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Chicago', 'Charcoal', 'Geneva', Helvetica, Arial, sans-serif;
 }
 
 :root {
-    --bg-color: #0d0d0d;
-    --second-bg-color: #1a1a1a;
-    --text-color: #e0e0e0;
-    --main-color: #b8b8b8;
+    --bg-color: #000000;
+    --window-bg: #ffffff;
+    --window-content-bg: #f0f0f0;
+    --titlebar-bg: #cccccc;
+    --text-color: #000000;
+    --main-color: #555555;
+    --border-color: #000000;
+    --menu-bar-bg: #ffffff;
+    --btn-bg: #dddddd;
+    --footer-bg: #cccccc;
+    --titlebar-stripe: repeating-linear-gradient(
+        to bottom,
+        #ffffff 0px, #ffffff 1px,
+        #888888 1px, #888888 2px
+    );
 }
 
 /* === After Dark: Starfield Background === */
@@ -82,95 +93,157 @@ body {
 
 section {
     min-height: 100vh;
-    padding: 10rem 9% 2rem;
+    padding: 5rem 6% 4rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
 }
 
+/* === Mac Menu Bar (Header) === */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 0 9%;
+    height: 22px;
+    background: var(--menu-bar-bg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.header.sticky {
+    background: var(--menu-bar-bg);
+}
+
+.logo {
+    font-size: 1.3rem;
+    color: var(--text-color);
+    font-weight: 700;
+    letter-spacing: 0;
+}
+
+.navbar a {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    font-weight: 500;
+    margin-left: 1.8rem;
+    padding: 2px 5px;
+    transition: none;
+}
+
+.navbar a:hover,
+.navbar a.active {
+    background: var(--text-color);
+    color: var(--menu-bar-bg);
+}
+
+#menu-icon {
+    font-size: 1.6rem;
+    color: var(--text-color);
+    cursor: pointer;
+    display: none;
+}
+
+/* === OG Mac Window Chrome === */
+.mac-window {
+    background: var(--window-bg);
+    border: 2px solid var(--border-color);
+    box-shadow: 4px 4px 0 var(--border-color);
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 80rem;
+}
+
+.mac-titlebar {
+    height: 22px;
+    background: var(--titlebar-stripe);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 0 5px;
+}
+
+.mac-close-btn {
+    width: 11px;
+    height: 11px;
+    border: 1px solid var(--border-color);
+    background: var(--titlebar-bg);
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+}
+
+.mac-title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.2rem;
+    font-weight: 700;
+    background: var(--titlebar-bg);
+    padding: 0 8px;
+    line-height: 20px;
+    white-space: nowrap;
+    z-index: 1;
+}
+
+.mac-content {
+    padding: 2.5rem 3rem;
+    background: var(--window-content-bg);
+}
+
+/* === Headings === */
 .heading {
     text-align: center;
-    font-size: 4.5rem;
-    margin-bottom: 3rem;
+    font-size: 2.4rem;
+    font-weight: 700;
+    margin-bottom: 2.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    color: var(--text-color);
 }
 
 span {
     color: var(--main-color);
 }
 
-/* Header & Navbar */
-.header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 2rem 9%;
-    background: transparent;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 100;
-    transition: .3s;
-}
-
-.header.sticky {
-    background: var(--bg-color);
-}
-
-.logo {
-    font-size: 2.5rem;
-    color: var(--text-color);
-    font-weight: 600;
-}
-
-.navbar a {
-    font-size: 1.7rem;
-    color: var(--text-color);
-    font-weight: 500;
-    margin-left: 3.5rem;
-    transition: .3s;
-}
-
-.navbar a:hover,
-.navbar a.active {
-    color: var(--main-color);
-}
-
-#menu-icon {
-    font-size: 3.6rem;
-    color: var(--text-color);
-    cursor: pointer;
-    display: none;
-}
-
-/* Home Section */
+/* === Home Section === */
 .home {
-    display: flex;
-    align-items: center;
-}
-
-.home-content {
-    max-width: 60rem;
+    padding-top: 4rem;
 }
 
 .home-content h1 {
-    font-size: 5.6rem;
+    font-size: 3.2rem;
     font-weight: 700;
     line-height: 1.3;
+    color: var(--text-color);
+    margin-bottom: 1rem;
 }
 
 .home-content .text-animation {
     position: relative;
-    width: 32.8rem;
+    width: 36rem;
+    margin-bottom: 1.5rem;
 }
 
 .home-content .text-animation h3 {
-    font-size: 3.2rem;
+    font-size: 1.8rem;
     font-weight: 700;
-    color: transparent;
-    -webkit-text-stroke: .7px var(--main-color);
+    color: var(--text-color);
+    -webkit-text-stroke: 0;
+    letter-spacing: 0.05rem;
 }
 
 .text-animation span::after {
     content: '|';
-    color: var(--main-color);
+    color: var(--text-color);
     animation: blink 0.7s step-end infinite;
 }
 
@@ -180,115 +253,154 @@ span {
 }
 
 .home-content p {
-    font-size: 1.6rem;
-    margin: 2rem 0 4rem;
+    font-size: 1.4rem;
+    line-height: 1.6;
+    margin: 1.5rem 0 3rem;
+    color: var(--text-color);
 }
 
+/* === Buttons (Mac Dialog Style) === */
 .btn {
     display: inline-block;
-    padding: 1rem 2.8rem;
-    background: var(--main-color);
-    border-radius: .6rem;
-    box-shadow: 0 0 1rem var(--main-color);
-    font-size: 1.6rem;
-    color: var(--bg-color);
-    letter-spacing: .1rem;
-    font-weight: 600;
-    transition: .5s ease;
+    padding: 0.6rem 2rem;
+    background: var(--btn-bg);
+    border: 2px solid var(--border-color);
+    box-shadow: 2px 2px 0 var(--border-color);
+    font-size: 1.3rem;
+    color: var(--text-color);
+    font-weight: 700;
+    letter-spacing: 0.05rem;
+    transition: none;
 }
 
 .btn:hover {
+    background: var(--text-color);
+    color: var(--window-bg);
     box-shadow: none;
 }
 
+/* === Social Icons === */
 .social-icons a {
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    width: 4rem;
-    height: 4rem;
-    background: transparent;
-    border: .2rem solid var(--main-color);
-    border-radius: 50%;
-    font-size: 2rem;
-    color: var(--main-color);
-    margin: 0 1.5rem 3rem 0;
-    transition: .5s ease;
+    width: 3.6rem;
+    height: 3.6rem;
+    background: var(--btn-bg);
+    border: 2px solid var(--border-color);
+    box-shadow: 2px 2px 0 var(--border-color);
+    font-size: 1.8rem;
+    color: var(--text-color);
+    margin: 0 1.2rem 2.5rem 0;
+    transition: none;
 }
 
 .social-icons a:hover {
-    background: var(--main-color);
-    color: var(--bg-color);
-    box-shadow: 0 0 1rem var(--main-color);
+    background: var(--text-color);
+    color: var(--window-bg);
+    box-shadow: none;
 }
 
-/* About Section */
+/* === About Section === */
 .about {
-    background: transparent;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     flex-direction: column;
 }
 
 .about-content {
-    text-align: center;
-    max-width: 70rem;
+    text-align: left;
 }
 
 .about-content p {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     line-height: 1.7;
+    color: var(--text-color);
 }
 
-/* Projects Section */
+/* === Projects Section === */
 .projects {
-    background: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.projects .mac-window {
+    max-width: 95rem;
 }
 
 .projects-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(28rem, 1fr));
     gap: 2.5rem;
 }
 
+/* Each project card is itself a mini Mac window */
 .project-card {
-    background: var(--second-bg-color);
-    border-radius: 1rem;
-    overflow: hidden;
+    background: var(--window-bg);
+    border: 2px solid var(--border-color);
+    box-shadow: 3px 3px 0 var(--border-color);
     display: flex;
     flex-direction: column;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-    transition: transform .3s ease;
+    overflow: hidden;
+    transition: none;
 }
 
 .project-card:hover {
-    transform: translateY(-10px);
+    transform: none;
+    box-shadow: 1px 1px 0 var(--border-color);
+}
+
+.project-card-titlebar {
+    height: 18px;
+    background: var(--titlebar-stripe);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    padding: 0 4px;
+    flex-shrink: 0;
+}
+
+.project-card-closebtn {
+    width: 9px;
+    height: 9px;
+    border: 1px solid var(--border-color);
+    background: var(--titlebar-bg);
+    flex-shrink: 0;
 }
 
 .project-card img {
     width: 100%;
-    height: 200px;
+    height: 180px;
     object-fit: cover;
     object-position: top;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .project-info {
-    padding: 2rem;
+    padding: 1.5rem;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
+    background: var(--window-content-bg);
 }
 
 .project-info h4 {
-    font-size: 2rem;
-    color: var(--main-color);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
 }
 
 .project-info p {
-    font-size: 1.5rem;
-    margin: 1rem 0 2rem;
+    font-size: 1.3rem;
+    margin: 0.5rem 0 1.5rem;
     flex-grow: 1;
+    color: var(--text-color);
+    line-height: 1.5;
 }
 
 .project-links {
@@ -296,65 +408,82 @@ span {
     gap: 1rem;
 }
 
-/* Skills Section */
+/* === Skills Section === */
 .skills {
-    background: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .skills-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 1.5rem;
+    justify-content: flex-start;
+    gap: 1rem;
 }
 
 .skill-tag {
-    background: var(--bg-color);
-    color: var(--main-color);
-    border: 1px solid var(--main-color);
-    padding: 1rem 2rem;
-    font-size: 1.6rem;
-    font-weight: 500;
-    border-radius: .5rem;
-    transition: .3s;
+    background: var(--btn-bg);
+    color: var(--text-color);
+    border: 2px solid var(--border-color);
+    box-shadow: 2px 2px 0 var(--border-color);
+    padding: 0.7rem 1.6rem;
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+    transition: none;
 }
 
 .skill-tag:hover {
-    background: var(--main-color);
-    color: var(--bg-color);
+    background: var(--text-color);
+    color: var(--window-bg);
+    box-shadow: none;
 }
 
-/* Contact Section */
+/* === Contact Section === */
 .contact {
-    background: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contact .mac-content {
     text-align: center;
 }
 
 .contact-content p {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     margin-bottom: 2rem;
+    color: var(--text-color);
 }
 
-/* Footer */
+/* === Footer === */
 .footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 2rem 9%;
-    background: var(--second-bg-color);
+    padding: 0.8rem 9%;
+    background: var(--footer-bg);
+    border-top: 1px solid var(--border-color);
+    position: relative;
+    z-index: 2;
 }
 
 .footer p {
-    font-size: 1.4rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text-color);
+    letter-spacing: 0.05rem;
 }
 
-/* Responsive Breakpoints */
+/* === Responsive Breakpoints === */
 @media (max-width: 991px) {
     .header {
-        padding: 2rem 4%;
+        padding: 0 4%;
     }
     section {
-        padding: 10rem 4% 2rem;
+        padding: 4rem 4% 3rem;
     }
 }
 
@@ -368,9 +497,10 @@ span {
         top: 100%;
         left: -100%;
         width: 100%;
-        padding: 1rem 4%;
-        background: var(--bg-color);
-        box-shadow: 0 .5rem 1rem rgba(0,0,0, .2);
+        padding: 0.8rem 4%;
+        background: var(--menu-bar-bg);
+        border: 1px solid var(--border-color);
+        box-shadow: 2px 2px 0 var(--border-color);
         transition: .25s ease;
         z-index: 1;
     }
@@ -381,7 +511,15 @@ span {
 
     .navbar a {
         display: block;
-        font-size: 2rem;
-        margin: 3rem 0;
+        font-size: 1.4rem;
+        margin: 1.5rem 0;
+    }
+
+    .mac-window {
+        max-width: 100%;
+    }
+
+    .home-content h1 {
+        font-size: 2.4rem;
     }
 }
