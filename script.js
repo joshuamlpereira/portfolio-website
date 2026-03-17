@@ -3,8 +3,8 @@
     function randomStars(count) {
         var arr = [];
         for (var i = 0; i < count; i++) {
-            var x = (Math.random() * 3000) | 0;
-            var y = (Math.random() * 2000) | 0;
+            var x = (Math.random() * 3840) | 0;
+            var y = (Math.random() * 2160) | 0;
             arr.push(x + 'px ' + y + 'px #fff');
         }
         return arr.join(',');
@@ -14,28 +14,6 @@
     root.style.setProperty('--stars2', randomStars(200));
     root.style.setProperty('--stars3', randomStars(100));
 })();
-
-// --- Mobile Navigation (Hamburger Menu) ---
-var menuIcon = document.querySelector('#menu-icon');
-var navbar   = document.querySelector('.navbar');
-
-if (menuIcon && navbar) {
-    menuIcon.onclick = function () {
-        menuIcon.classList.toggle('fa-bars');
-        menuIcon.classList.toggle('fa-xmark');
-        navbar.classList.toggle('active');
-    };
-
-    window.addEventListener('scroll', function () {
-        var header = document.querySelector('header');
-        if (header) {
-            header.classList.toggle('sticky', window.scrollY > 100);
-        }
-        menuIcon.classList.remove('fa-xmark');
-        menuIcon.classList.add('fa-bars');
-        navbar.classList.remove('active');
-    });
-}
 
 // --- Typing Animation (home page only) ---
 var typingSpan = document.querySelector('.text-animation span');
