@@ -14,40 +14,120 @@
     <div id="stars2"></div>
     <div id="stars3"></div>
 
-    <header class="header">
-        <a href="index.html" class="logo">Joshua Pereira</a>
-        <nav class="navbar">
-            <a href="index.html" class="active">Home</a>
-            <a href="about.html">About</a>
-            <a href="projects.html">Projects</a>
-            <a href="skills.html">Skills</a>
-            <a href="contact.html">Contact</a>
-        </nav>
-        <div class="fas fa-bars" id="menu-icon"></div>
-    </header>
+    <!-- Mac Menu Bar -->
+    <div class="menu-bar">
+        <span class="apple-logo">&#9670;</span>
+        <span class="menu-item active-menu">Finder</span>
+        <span class="menu-item">File</span>
+        <span class="menu-item">Edit</span>
+        <span class="menu-item">View</span>
+        <span class="menu-item">Special</span>
+        <span class="menu-bar-right">Joshua Pereira — Portfolio</span>
+    </div>
 
-    <section class="home" id="home">
-        <div class="mac-window">
-            <div class="mac-titlebar">
-                <span class="mac-close-btn"></span>
-                <span class="mac-title">Joshua Pereira — Home</span>
+    <!-- Finder Window -->
+    <div class="finder-window">
+
+        <!-- Title Bar -->
+        <div class="finder-titlebar">
+            <div class="win-controls">
+                <span class="win-btn"></span>
             </div>
-            <div class="mac-content home-content">
-                <h1>Hi, I'm <span>Joshua Pereira</span></h1>
-                <h3 class="text-animation">I'm a <span></span></h3>
-                <p>A passionate Computer Science and Engineering Technology student with a focus on cybersecurity and software development. I thrive on solving complex problems and building applications that are both functional and secure.</p>
-                <div class="social-icons">
-                    <a href="https://github.com/joshuamlpereira" target="_blank"><i class="fab fa-github"></i></a>
-                    <a href="https://www.linkedin.com/in/joshuamlpereira" target="_blank"><i class="fab fa-linkedin"></i></a>
-                </div>
-                <a href="contact.html" class="btn">Contact Me</a>
+            <span class="finder-title-text">Home — Finder</span>
+        </div>
+
+        <!-- Toolbar -->
+        <div class="finder-toolbar">
+            <div class="toolbar-nav">
+                <button class="nav-btn" onclick="history.back()">&#9664;</button>
+                <button class="nav-btn" onclick="history.forward()">&#9654;</button>
+            </div>
+            <div class="path-bar">
+                <span>Joshua's Portfolio</span>
+                <span class="path-sep">›</span>
+                <span class="path-current">Home</span>
             </div>
         </div>
-    </section>
 
-    <footer class="footer">
-        <p>&copy; 2026 Joshua Pereira | All Rights Reserved.</p>
-    </footer>
+        <!-- Body -->
+        <div class="finder-body">
+
+            <!-- Sidebar -->
+            <nav class="finder-sidebar">
+                <div class="sidebar-section-label">Favorites</div>
+                <a href="index.html" class="sidebar-item active">
+                    <span class="sidebar-folder"></span>
+                    <span>Home</span>
+                </a>
+                <a href="about.html" class="sidebar-item">
+                    <span class="sidebar-folder"></span>
+                    <span>About</span>
+                </a>
+                <a href="projects.html" class="sidebar-item">
+                    <span class="sidebar-folder"></span>
+                    <span>Projects</span>
+                </a>
+                <a href="skills.html" class="sidebar-item">
+                    <span class="sidebar-folder"></span>
+                    <span>Skills</span>
+                </a>
+                <a href="contact.html" class="sidebar-item">
+                    <span class="sidebar-folder"></span>
+                    <span>Contact</span>
+                </a>
+            </nav>
+
+            <!-- Main Panel -->
+            <main class="finder-panel">
+                <div class="home-panel">
+
+                    <!-- Folder shortcuts strip -->
+                    <div class="home-icon-strip">
+                        <div class="icon-grid">
+                            <a href="about.html" class="file-icon">
+                                <div class="icon-box"><div class="folder-icon-img"></div></div>
+                                <span class="icon-label">About</span>
+                            </a>
+                            <a href="projects.html" class="file-icon">
+                                <div class="icon-box"><div class="folder-icon-img"></div></div>
+                                <span class="icon-label">Projects</span>
+                            </a>
+                            <a href="skills.html" class="file-icon">
+                                <div class="icon-box"><div class="folder-icon-img"></div></div>
+                                <span class="icon-label">Skills</span>
+                            </a>
+                            <a href="contact.html" class="file-icon">
+                                <div class="icon-box"><div class="folder-icon-img"></div></div>
+                                <span class="icon-label">Contact</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Welcome content -->
+                    <div class="home-welcome">
+                        <h1>Hi, I'm <span>Joshua Pereira</span></h1>
+                        <h3 class="text-animation">I'm a <span></span></h3>
+                        <p>A passionate Computer Science and Engineering Technology student with a focus on cybersecurity and software development. I thrive on solving complex problems and building applications that are both functional and secure.</p>
+                        <div class="social-icons">
+                            <a href="https://github.com/joshuamlpereira" target="_blank"><i class="fab fa-github"></i></a>
+                            <a href="https://www.linkedin.com/in/joshuamlpereira" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                        <a href="contact.html" class="btn">Contact Me</a>
+                    </div>
+
+                </div>
+            </main>
+
+        </div>
+
+        <!-- Status Bar -->
+        <div class="finder-statusbar">
+            <span>4 items</span>
+            <span class="statusbar-divider"></span>
+            <span>Joshua Pereira Portfolio</span>
+        </div>
+
+    </div>
 
     <script src="script.js"></script>
 </body>

@@ -14,49 +14,107 @@
     <div id="stars2"></div>
     <div id="stars3"></div>
 
-    <header class="header sticky">
-        <a href="index.html" class="logo">Joshua Pereira</a>
-        <nav class="navbar">
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="projects.html" class="active">Projects</a>
-            <a href="skills.html">Skills</a>
-            <a href="contact.html">Contact</a>
-        </nav>
-        <div class="fas fa-bars" id="menu-icon"></div>
-    </header>
+    <!-- Mac Menu Bar -->
+    <div class="menu-bar">
+        <span class="apple-logo">&#9670;</span>
+        <span class="menu-item active-menu">Finder</span>
+        <span class="menu-item">File</span>
+        <span class="menu-item">Edit</span>
+        <span class="menu-item">View</span>
+        <span class="menu-item">Special</span>
+        <span class="menu-bar-right">Joshua Pereira — Portfolio</span>
+    </div>
 
-    <section class="projects" id="projects">
-        <div class="mac-window">
-            <div class="mac-titlebar">
-                <span class="mac-close-btn"></span>
-                <span class="mac-title">My Projects</span>
+    <!-- Finder Window -->
+    <div class="finder-window">
+
+        <!-- Title Bar -->
+        <div class="finder-titlebar">
+            <div class="win-controls">
+                <span class="win-btn"></span>
             </div>
-            <div class="mac-content">
-                <h2 class="heading">My <span>Projects</span></h2>
-                <div class="projects-container">
-                    <div class="project-card">
-                        <div class="project-card-titlebar">
-                            <span class="project-card-closebtn"></span>
-                        </div>
-                        <img src="https://i.imgur.com/gLwXfSX.png" alt="Password Strength Checker">
-                        <div class="project-info">
-                            <h4>Password Strength Checker</h4>
-                            <p>A live web tool built with vanilla HTML, CSS, and JavaScript that provides real-time feedback on password complexity to promote better security habits.</p>
-                            <div class="project-links">
-                                <a href="https://joshuamlpereira.github.io/password-strength-checker/" class="btn" target="_blank">Live Demo</a>
-                                <a href="https://github.com/joshuamlpereira/password-strength-checker" class="btn" target="_blank">View Code</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <span class="finder-title-text">Projects — Finder</span>
+        </div>
+
+        <!-- Toolbar -->
+        <div class="finder-toolbar">
+            <div class="toolbar-nav">
+                <button class="nav-btn" onclick="history.back()">&#9664;</button>
+                <button class="nav-btn" onclick="history.forward()">&#9654;</button>
+            </div>
+            <div class="path-bar">
+                <span>Joshua's Portfolio</span>
+                <span class="path-sep">›</span>
+                <span class="path-current">Projects</span>
             </div>
         </div>
-    </section>
 
-    <footer class="footer">
-        <p>&copy; 2026 Joshua Pereira | All Rights Reserved.</p>
-    </footer>
+        <!-- Body -->
+        <div class="finder-body">
+
+            <!-- Sidebar -->
+            <nav class="finder-sidebar">
+                <div class="sidebar-section-label">Favorites</div>
+                <a href="index.html" class="sidebar-item">
+                    <span class="sidebar-folder"></span>
+                    <span>Home</span>
+                </a>
+                <a href="about.html" class="sidebar-item">
+                    <span class="sidebar-folder"></span>
+                    <span>About</span>
+                </a>
+                <a href="projects.html" class="sidebar-item active">
+                    <span class="sidebar-folder"></span>
+                    <span>Projects</span>
+                </a>
+                <a href="skills.html" class="sidebar-item">
+                    <span class="sidebar-folder"></span>
+                    <span>Skills</span>
+                </a>
+                <a href="contact.html" class="sidebar-item">
+                    <span class="sidebar-folder"></span>
+                    <span>Contact</span>
+                </a>
+            </nav>
+
+            <!-- Main Panel -->
+            <main class="finder-panel">
+                <div class="projects-panel">
+
+                    <h2 class="section-heading">My <span>Projects</span></h2>
+
+                    <div class="projects-grid">
+
+                        <div class="project-card">
+                            <div class="project-card-titlebar">
+                                <span class="project-card-closebtn"></span>
+                            </div>
+                            <img src="https://i.imgur.com/gLwXfSX.png" alt="Password Strength Checker">
+                            <div class="project-info">
+                                <h4>Password Strength Checker</h4>
+                                <p>A live web tool built with vanilla HTML, CSS, and JavaScript that provides real-time feedback on password complexity to promote better security habits.</p>
+                                <div class="project-links">
+                                    <a href="https://joshuamlpereira.github.io/password-strength-checker/" class="btn" target="_blank">Live Demo</a>
+                                    <a href="https://github.com/joshuamlpereira/password-strength-checker" class="btn" target="_blank">View Code</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </main>
+
+        </div>
+
+        <!-- Status Bar -->
+        <div class="finder-statusbar">
+            <span>1 item</span>
+            <span class="statusbar-divider"></span>
+            <span>Joshua Pereira Portfolio</span>
+        </div>
+
+    </div>
 
     <script src="script.js"></script>
 </body>

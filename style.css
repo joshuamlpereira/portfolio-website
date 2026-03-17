@@ -1,5 +1,7 @@
-/* OG Macintosh + After Dark Theme */
-/* Chicago/Geneva font stack for authentic classic Mac feel */
+/* After Dark + Macintosh File Explorer Theme */
+/* VT323 retro pixel font — scaled for 1920×1080 */
+
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
 * {
     margin: 0;
@@ -8,21 +10,25 @@
     text-decoration: none;
     border: none;
     outline: none;
-    scroll-behavior: smooth;
-    font-family: 'Chicago', 'Charcoal', 'Geneva', Helvetica, Arial, sans-serif;
 }
 
 :root {
-    --bg-color: #000000;
-    --window-bg: #ffffff;
-    --window-content-bg: #f0f0f0;
-    --titlebar-bg: #cccccc;
-    --text-color: #000000;
-    --main-color: #555555;
-    --border-color: #000000;
-    --menu-bar-bg: #ffffff;
-    --btn-bg: #dddddd;
-    --footer-bg: #cccccc;
+    --bg:              #000000;
+    --window-bg:       #ffffff;
+    --sidebar-bg:      #d4d0c8;
+    --panel-bg:        #f5f1e8;
+    --titlebar-bg:     #c8c4bc;
+    --text:            #000000;
+    --border:          #000000;
+    --border-soft:     #888888;
+    --menubar-bg:      #f0ece4;
+    --selected-bg:     #000080;
+    --selected-text:   #ffffff;
+    --statusbar-bg:    #d4d0c8;
+    --folder-yellow:   #f0c030;
+    --highlight:       #555555;
+    --btn-bg:          #d4d0c8;
+    --font:            'VT323', 'Courier New', Courier, monospace;
     --titlebar-stripe: repeating-linear-gradient(
         to bottom,
         #ffffff 0px, #ffffff 1px,
@@ -72,6 +78,7 @@
     border-radius: 50%;
     background: transparent;
 }
+
 #stars1::after { width: 1px; height: 1px; box-shadow: var(--stars1); }
 #stars2::after { width: 2px; height: 2px; box-shadow: var(--stars2); }
 #stars3::after { width: 3px; height: 3px; box-shadow: var(--stars3); }
@@ -81,281 +88,587 @@
     to   { transform: translateY(-2000px); }
 }
 
-html {
-    font-size: 62.5%;
-    overflow-x: hidden;
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: var(--bg);
+    font-family: var(--font);
+    font-size: 16px;
 }
 
-body {
-    background: var(--bg-color);
-    color: var(--text-color);
-}
+/* ── MAC MENU BAR ─────────────────────────────────── */
 
-section {
-    min-height: 100vh;
-    padding: 5rem 6% 4rem;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    position: relative;
-    z-index: 1;
-}
-
-/* === Mac Menu Bar (Header) === */
-.header {
+.menu-bar {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    padding: 0 9%;
     height: 22px;
-    background: var(--menu-bar-bg);
+    background: var(--menubar-bg);
+    border-bottom: 1px solid var(--border);
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    z-index: 100;
-    border-bottom: 1px solid var(--border-color);
+    z-index: 200;
+    font-family: var(--font);
+    font-size: 15px;
 }
 
-.header.sticky {
-    background: var(--menu-bar-bg);
+.apple-logo {
+    padding: 0 12px;
+    font-size: 18px;
+    cursor: default;
+    line-height: 22px;
+    border-right: 1px solid #bbb;
 }
 
-.logo {
-    font-size: 1.3rem;
-    color: var(--text-color);
-    font-weight: 700;
-    letter-spacing: 0;
+.menu-item {
+    padding: 0 10px;
+    cursor: default;
+    color: var(--text);
+    line-height: 22px;
+    font-size: 15px;
+    white-space: nowrap;
 }
 
-.navbar a {
-    font-size: 1.2rem;
-    color: var(--text-color);
-    font-weight: 500;
-    margin-left: 1.8rem;
-    padding: 2px 5px;
-    transition: none;
+.menu-item:hover,
+.menu-item.active-menu {
+    background: var(--selected-bg);
+    color: var(--selected-text);
 }
 
-.navbar a:hover,
-.navbar a.active {
-    background: var(--text-color);
-    color: var(--menu-bar-bg);
+.menu-bar-right {
+    margin-left: auto;
+    padding-right: 14px;
+    font-size: 14px;
+    color: #555;
+    white-space: nowrap;
 }
 
-#menu-icon {
-    font-size: 1.6rem;
-    color: var(--text-color);
-    cursor: pointer;
-    display: none;
-}
+/* ── FINDER WINDOW ────────────────────────────────── */
 
-/* === OG Mac Window Chrome === */
-.mac-window {
+.finder-window {
+    position: fixed;
+    top: 22px;
+    left: 0;
+    right: 0;
+    bottom: 0;
     background: var(--window-bg);
-    border: 2px solid var(--border-color);
-    box-shadow: 4px 4px 0 var(--border-color);
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    max-width: 80rem;
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+    border-top: 1px solid var(--border-soft);
 }
 
-.mac-titlebar {
+/* Title Bar */
+.finder-titlebar {
     height: 22px;
     background: var(--titlebar-stripe);
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border);
     display: flex;
     align-items: center;
-    position: relative;
-    padding: 0 5px;
-}
-
-.mac-close-btn {
-    width: 11px;
-    height: 11px;
-    border: 1px solid var(--border-color);
-    background: var(--titlebar-bg);
+    padding: 0 6px;
     flex-shrink: 0;
     position: relative;
-    z-index: 2;
 }
 
-.mac-title {
+.win-controls {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    z-index: 1;
+}
+
+.win-btn {
+    width: 11px;
+    height: 11px;
+    background: var(--titlebar-bg);
+    border: 1px solid var(--border);
+    display: block;
+    cursor: default;
+    flex-shrink: 0;
+}
+
+.finder-title-text {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 1.2rem;
-    font-weight: 700;
+    font-family: var(--font);
+    font-size: 15px;
+    font-weight: bold;
     background: var(--titlebar-bg);
-    padding: 0 8px;
+    padding: 0 10px;
     line-height: 20px;
     white-space: nowrap;
     z-index: 1;
 }
 
-.mac-content {
-    padding: 2.5rem 3rem;
-    background: var(--window-content-bg);
+/* Toolbar */
+.finder-toolbar {
+    height: 36px;
+    background: var(--sidebar-bg);
+    border-bottom: 1px solid var(--border-soft);
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    gap: 12px;
+    flex-shrink: 0;
 }
 
-/* === Headings === */
-.heading {
-    text-align: center;
-    font-size: 2.4rem;
-    font-weight: 700;
-    margin-bottom: 2.5rem;
+.toolbar-nav {
+    display: flex;
+    gap: 3px;
+}
+
+.nav-btn {
+    background: var(--btn-bg);
+    border: 1px solid var(--border-soft);
+    box-shadow: 1px 1px 0 var(--border);
+    width: 28px;
+    height: 22px;
+    cursor: pointer;
+    font-family: var(--font);
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text);
+}
+
+.nav-btn:hover { background: #e8e4dc; }
+
+.path-bar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font);
+    font-size: 18px;
+    color: var(--text);
+}
+
+.path-sep { color: #666; }
+.path-current { font-weight: bold; }
+
+/* Body Layout */
+.finder-body {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    min-height: 0;
+}
+
+/* ── SIDEBAR ──────────────────────────────────────── */
+
+.finder-sidebar {
+    width: 210px;
+    min-width: 180px;
+    background: var(--sidebar-bg);
+    border-right: 1px solid var(--border-soft);
+    overflow-y: auto;
+    flex-shrink: 0;
+    padding: 10px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-section-label {
+    font-family: var(--font);
+    font-size: 12px;
+    color: #666;
+    padding: 8px 14px 4px;
     text-transform: uppercase;
-    letter-spacing: 0.1rem;
-    color: var(--text-color);
+    letter-spacing: 0.06em;
 }
 
-span {
-    color: var(--main-color);
+.sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 14px;
+    font-family: var(--font);
+    font-size: 20px;
+    color: var(--text);
+    cursor: pointer;
+    text-decoration: none;
 }
 
-/* === Home Section === */
-.home {
-    padding-top: 4rem;
+.sidebar-item:hover { background: rgba(0, 0, 128, 0.12); }
+
+.sidebar-item.active {
+    background: var(--selected-bg);
+    color: var(--selected-text);
 }
 
-.home-content h1 {
-    font-size: 3.2rem;
-    font-weight: 700;
-    line-height: 1.3;
-    color: var(--text-color);
-    margin-bottom: 1rem;
-}
-
-.home-content .text-animation {
+/* CSS folder icon in sidebar */
+.sidebar-folder {
+    width: 20px;
+    height: 15px;
+    background: var(--folder-yellow);
+    border: 1px solid var(--border-soft);
+    border-radius: 0 3px 3px 3px;
     position: relative;
-    width: 36rem;
-    margin-bottom: 1.5rem;
+    flex-shrink: 0;
+    display: block;
+    top: 3px;
 }
 
-.home-content .text-animation h3 {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: var(--text-color);
-    -webkit-text-stroke: 0;
-    letter-spacing: 0.05rem;
+.sidebar-folder::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 0;
+    width: 9px;
+    height: 6px;
+    background: var(--folder-yellow);
+    border: 1px solid var(--border-soft);
+    border-bottom: none;
+    border-radius: 2px 2px 0 0;
+}
+
+.sidebar-item.active .sidebar-folder {
+    background: #7070d0;
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.sidebar-item.active .sidebar-folder::before {
+    background: #7070d0;
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* ── MAIN PANEL ───────────────────────────────────── */
+
+.finder-panel {
+    flex: 1;
+    background: var(--panel-bg);
+    overflow-y: auto;
+    position: relative;
+}
+
+/* ── STATUS BAR ───────────────────────────────────── */
+
+.finder-statusbar {
+    height: 20px;
+    background: var(--statusbar-bg);
+    border-top: 1px solid var(--border-soft);
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+    font-family: var(--font);
+    font-size: 14px;
+    color: #555;
+    flex-shrink: 0;
+    gap: 16px;
+}
+
+.statusbar-divider {
+    width: 1px;
+    height: 12px;
+    background: #888;
+}
+
+/* ── ICON GRID (shared) ───────────────────────────── */
+
+.icon-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px 32px;
+    padding: 20px 24px;
+}
+
+.file-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90px;
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--text);
+}
+
+.file-icon:hover .icon-box,
+.file-icon.selected .icon-box {
+    outline: 2px solid var(--selected-bg);
+}
+
+.file-icon:hover .icon-label,
+.file-icon.selected .icon-label {
+    background: var(--selected-bg);
+    color: var(--selected-text);
+}
+
+.icon-box {
+    width: 60px;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.icon-label {
+    font-family: var(--font);
+    font-size: 16px;
+    text-align: center;
+    padding: 1px 4px;
+    max-width: 90px;
+    word-break: break-word;
+    line-height: 1.2;
+}
+
+/* Large CSS folder icon */
+.folder-icon-img {
+    width: 54px;
+    height: 44px;
+    background: var(--folder-yellow);
+    border: 2px solid #888;
+    border-radius: 0 4px 4px 4px;
+    position: relative;
+}
+
+.folder-icon-img::before {
+    content: '';
+    position: absolute;
+    top: -11px;
+    left: 0;
+    width: 22px;
+    height: 11px;
+    background: var(--folder-yellow);
+    border: 2px solid #888;
+    border-bottom: none;
+    border-radius: 4px 4px 0 0;
+}
+
+/* Large CSS document icon */
+.doc-icon-img {
+    width: 46px;
+    height: 56px;
+    background: #ffffff;
+    border: 2px solid #888;
+    position: relative;
+}
+
+.doc-icon-img::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 14px;
+    height: 14px;
+    border-left: 2px solid #888;
+    border-bottom: 2px solid #888;
+    background: #ddd;
+}
+
+.doc-icon-img::after {
+    content: '';
+    position: absolute;
+    top: 18px;
+    left: 6px;
+    right: 6px;
+    height: 2px;
+    background: #aaa;
+    box-shadow: 0 5px 0 #aaa, 0 10px 0 #aaa, 0 15px 0 #aaa;
+}
+
+/* ── HOME PAGE ────────────────────────────────────── */
+
+.home-panel {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.panel-info-bar {
+    background: #eae6de;
+    border-bottom: 1px solid var(--border-soft);
+    padding: 4px 18px;
+    font-family: var(--font);
+    font-size: 14px;
+    color: #666;
+    font-style: italic;
+    flex-shrink: 0;
+}
+
+.home-icon-strip {
+    border-bottom: 1px solid var(--border-soft);
+    background: var(--window-bg);
+    flex-shrink: 0;
+}
+
+.home-welcome {
+    flex: 1;
+    padding: 32px 44px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow-y: auto;
+}
+
+.home-welcome h1 {
+    font-family: var(--font);
+    font-size: 56px;
+    font-weight: 400;
+    color: var(--text);
+    line-height: 1.1;
+    margin-bottom: 8px;
+}
+
+.home-welcome h1 span {
+    color: var(--highlight);
+}
+
+.home-welcome .text-animation {
+    font-family: var(--font);
+    font-size: 34px;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 18px;
 }
 
 .text-animation span::after {
-    content: '|';
-    color: var(--text-color);
+    content: '█';
+    color: var(--text);
     animation: blink 0.7s step-end infinite;
 }
 
 @keyframes blink {
     0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
+    50%       { opacity: 0; }
 }
 
-.home-content p {
-    font-size: 1.4rem;
-    line-height: 1.6;
-    margin: 1.5rem 0 3rem;
-    color: var(--text-color);
+.home-welcome p {
+    font-family: var(--font);
+    font-size: 24px;
+    line-height: 1.5;
+    color: var(--text);
+    max-width: 720px;
+    margin-bottom: 26px;
 }
 
-/* === Buttons (Mac Dialog Style) === */
+/* ── BUTTONS ──────────────────────────────────────── */
+
 .btn {
     display: inline-block;
-    padding: 0.6rem 2rem;
+    padding: 5px 22px;
     background: var(--btn-bg);
-    border: 2px solid var(--border-color);
-    box-shadow: 2px 2px 0 var(--border-color);
-    font-size: 1.3rem;
-    color: var(--text-color);
-    font-weight: 700;
-    letter-spacing: 0.05rem;
-    transition: none;
+    border: 2px solid var(--border);
+    box-shadow: 2px 2px 0 var(--border);
+    font-family: var(--font);
+    font-size: 20px;
+    color: var(--text);
+    cursor: pointer;
+    text-decoration: none;
 }
 
 .btn:hover {
-    background: var(--text-color);
+    background: var(--text);
     color: var(--window-bg);
     box-shadow: none;
 }
 
-/* === Social Icons === */
+/* ── SOCIAL ICONS ─────────────────────────────────── */
+
+.social-icons {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 22px;
+}
+
 .social-icons a {
     display: inline-flex;
-    justify-content: center;
     align-items: center;
-    width: 3.6rem;
-    height: 3.6rem;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
     background: var(--btn-bg);
-    border: 2px solid var(--border-color);
-    box-shadow: 2px 2px 0 var(--border-color);
-    font-size: 1.8rem;
-    color: var(--text-color);
-    margin: 0 1.2rem 2.5rem 0;
-    transition: none;
+    border: 2px solid var(--border);
+    box-shadow: 2px 2px 0 var(--border);
+    font-size: 22px;
+    color: var(--text);
+    text-decoration: none;
 }
 
 .social-icons a:hover {
-    background: var(--text-color);
+    background: var(--text);
     color: var(--window-bg);
     box-shadow: none;
 }
 
-/* === About Section === */
-.about {
+/* ── SECTION HEADING ──────────────────────────────── */
+
+.section-heading {
+    font-family: var(--font);
+    font-size: 38px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 8px;
+    margin-bottom: 24px;
+    color: var(--text);
+}
+
+.section-heading span {
+    color: var(--highlight);
+}
+
+/* ── ABOUT PAGE ───────────────────────────────────── */
+
+.about-panel {
+    padding: 36px 48px;
+    max-width: 960px;
+}
+
+.about-doc-row {
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    flex-direction: column;
-}
-
-.about-content {
-    text-align: left;
-}
-
-.about-content p {
-    font-size: 1.4rem;
-    line-height: 1.7;
-    color: var(--text-color);
-}
-
-/* === Projects Section === */
-.projects {
-    display: flex;
-    flex-direction: column;
     align-items: center;
+    gap: 12px;
+    margin-bottom: 22px;
 }
 
-.projects .mac-window {
-    max-width: 95rem;
+.about-doc-filename {
+    font-family: var(--font);
+    font-size: 20px;
+    color: var(--text);
 }
 
-.projects-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(28rem, 1fr));
-    gap: 2.5rem;
+.about-panel p {
+    font-family: var(--font);
+    font-size: 24px;
+    line-height: 1.6;
+    color: var(--text);
 }
 
-/* Each project card is itself a mini Mac window */
+/* ── PROJECTS PAGE ────────────────────────────────── */
+
+.projects-panel {
+    padding: 28px 36px;
+}
+
+.projects-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 26px;
+}
+
 .project-card {
     background: var(--window-bg);
-    border: 2px solid var(--border-color);
-    box-shadow: 3px 3px 0 var(--border-color);
+    border: 2px solid var(--border);
+    box-shadow: 3px 3px 0 var(--border);
+    width: 340px;
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    transition: none;
 }
 
 .project-card:hover {
-    transform: none;
-    box-shadow: 1px 1px 0 var(--border-color);
+    box-shadow: 1px 1px 0 var(--border);
 }
 
 .project-card-titlebar {
     height: 18px;
     background: var(--titlebar-stripe);
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border);
     display: flex;
     align-items: center;
     padding: 0 4px;
@@ -365,161 +678,161 @@ span {
 .project-card-closebtn {
     width: 9px;
     height: 9px;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--border);
     background: var(--titlebar-bg);
     flex-shrink: 0;
 }
 
 .project-card img {
     width: 100%;
-    height: 180px;
+    height: 190px;
     object-fit: cover;
     object-position: top;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border);
 }
 
 .project-info {
-    padding: 1.5rem;
+    padding: 16px;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    background: var(--window-content-bg);
+    background: #fafafa;
 }
 
 .project-info h4 {
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: var(--text-color);
-    margin-bottom: 0.5rem;
+    font-family: var(--font);
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 6px;
     text-transform: uppercase;
-    letter-spacing: 0.05rem;
+    letter-spacing: 0.06em;
 }
 
 .project-info p {
-    font-size: 1.3rem;
-    margin: 0.5rem 0 1.5rem;
+    font-family: var(--font);
+    font-size: 19px;
+    line-height: 1.4;
+    color: var(--text);
     flex-grow: 1;
-    color: var(--text-color);
-    line-height: 1.5;
+    margin-bottom: 14px;
 }
 
 .project-links {
     display: flex;
-    gap: 1rem;
+    gap: 10px;
 }
 
-/* === Skills Section === */
-.skills {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+/* ── SKILLS PAGE ──────────────────────────────────── */
+
+.skills-panel {
+    padding: 36px 48px;
 }
 
-.skills-container {
+.skills-grid {
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
-    gap: 1rem;
+    gap: 20px 28px;
 }
 
-.skill-tag {
-    background: var(--btn-bg);
-    color: var(--text-color);
-    border: 2px solid var(--border-color);
-    box-shadow: 2px 2px 0 var(--border-color);
-    padding: 0.7rem 1.6rem;
-    font-size: 1.3rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05rem;
-    transition: none;
-}
-
-.skill-tag:hover {
-    background: var(--text-color);
-    color: var(--window-bg);
-    box-shadow: none;
-}
-
-/* === Contact Section === */
-.contact {
+.skill-file {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    color: var(--text);
+    width: 96px;
+    cursor: default;
 }
 
-.contact .mac-content {
-    text-align: center;
+.skill-file:hover .doc-icon-sm {
+    outline: 2px solid var(--selected-bg);
 }
 
-.contact-content p {
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
-    color: var(--text-color);
+.skill-file:hover .skill-label {
+    background: var(--selected-bg);
+    color: var(--selected-text);
 }
 
-/* === Footer === */
-.footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0.8rem 9%;
-    background: var(--footer-bg);
-    border-top: 1px solid var(--border-color);
+.doc-icon-sm {
+    width: 46px;
+    height: 56px;
+    background: #fff;
+    border: 2px solid #888;
     position: relative;
-    z-index: 2;
 }
 
-.footer p {
-    font-size: 1.1rem;
-    font-weight: 500;
-    color: var(--text-color);
-    letter-spacing: 0.05rem;
+.doc-icon-sm::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 13px;
+    height: 13px;
+    border-left: 2px solid #888;
+    border-bottom: 2px solid #888;
+    background: #ddd;
 }
 
-/* === Responsive Breakpoints === */
-@media (max-width: 991px) {
-    .header {
-        padding: 0 4%;
-    }
-    section {
-        padding: 4rem 4% 3rem;
-    }
+.doc-icon-sm::after {
+    content: '';
+    position: absolute;
+    top: 16px;
+    left: 5px;
+    right: 5px;
+    height: 2px;
+    background: #bbb;
+    box-shadow: 0 5px 0 #bbb, 0 10px 0 #bbb;
 }
 
-@media (max-width: 768px) {
-    #menu-icon {
-        display: block;
+.skill-label {
+    font-family: var(--font);
+    font-size: 16px;
+    text-align: center;
+    padding: 1px 4px;
+    max-width: 96px;
+    word-break: break-word;
+    text-transform: uppercase;
+    line-height: 1.2;
+}
+
+/* ── CONTACT PAGE ─────────────────────────────────── */
+
+.contact-panel {
+    padding: 36px 48px;
+    max-width: 760px;
+}
+
+.contact-panel p {
+    font-family: var(--font);
+    font-size: 24px;
+    line-height: 1.5;
+    color: var(--text);
+    margin-bottom: 28px;
+}
+
+/* ── RESPONSIVE ───────────────────────────────────── */
+
+@media (max-width: 900px) {
+    .finder-sidebar {
+        width: 170px;
+        min-width: 150px;
     }
 
-    .navbar {
-        position: absolute;
-        top: 100%;
-        left: -100%;
-        width: 100%;
-        padding: 0.8rem 4%;
-        background: var(--menu-bar-bg);
-        border: 1px solid var(--border-color);
-        box-shadow: 2px 2px 0 var(--border-color);
-        transition: .25s ease;
-        z-index: 1;
-    }
+    .home-welcome h1 { font-size: 40px; }
+    .home-welcome .text-animation { font-size: 26px; }
+    .home-welcome p { font-size: 20px; }
+    .section-heading { font-size: 30px; }
+    .about-panel p,
+    .contact-panel p { font-size: 20px; }
+}
 
-    .navbar.active {
-        left: 0;
-    }
-
-    .navbar a {
-        display: block;
-        font-size: 1.4rem;
-        margin: 1.5rem 0;
-    }
-
-    .mac-window {
-        max-width: 100%;
-    }
-
-    .home-content h1 {
-        font-size: 2.4rem;
-    }
+@media (max-width: 600px) {
+    .finder-sidebar { display: none; }
+    .home-welcome { padding: 20px 24px; }
+    .about-panel,
+    .skills-panel,
+    .contact-panel,
+    .projects-panel { padding: 20px 20px; }
 }
