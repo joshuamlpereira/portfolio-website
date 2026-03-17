@@ -117,6 +117,17 @@ span {
     -webkit-text-stroke: .7px var(--main-color);
 }
 
+.text-animation span::after {
+    content: '|';
+    color: var(--main-color);
+    animation: blink 0.7s step-end infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
 .home-content p {
     font-size: 1.6rem;
     margin: 2rem 0 4rem;

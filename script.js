@@ -3,7 +3,8 @@ let menuIcon = document.querySelector('#menu-icon');
 let navbar = document.querySelector('.navbar');
 
 menuIcon.onclick = () => {
-    menuIcon.classList.toggle('fa-xmark'); // Note: 'fa-xmark' might not be in your Font Awesome kit
+    menuIcon.classList.toggle('fa-bars');
+    menuIcon.classList.toggle('fa-xmark');
     navbar.classList.toggle('active');
 };
 
@@ -32,5 +33,37 @@ window.onscroll = () => {
 
     // --- Close Mobile Nav on Link Click ---
     menuIcon.classList.remove('fa-xmark');
+    menuIcon.classList.add('fa-bars');
     navbar.classList.remove('active');
 };
+
+// --- Typing Animation ---
+const typingTexts = ['Software Developer', 'Cybersecurity Enthusiast', 'Problem Solver'];
+let textIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+const typingSpan = document.querySelector('.text-animation span');
+
+function type() {
+    const current = typingTexts[textIndex];
+    if (isDeleting) {
+        typingSpan.textContent = current.substring(0, charIndex - 1);
+        charIndex--;
+    } else {
+        typingSpan.textContent = current.substring(0, charIndex + 1);
+        charIndex++;
+    }
+
+    if (!isDeleting && charIndex === current.length) {
+        isDeleting = true;
+        setTimeout(type, 1500);
+    } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        textIndex = (textIndex + 1) % typingTexts.length;
+        setTimeout(type, 400);
+    } else {
+        setTimeout(type, isDeleting ? 60 : 100);
+    }
+}
+
+type();
